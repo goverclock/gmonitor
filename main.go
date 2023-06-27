@@ -1,4 +1,3 @@
-// iwgetid -r
 package main
 
 import (
@@ -19,7 +18,10 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	// net name
 	out := ""
 	cmd := exec.Command("iwgetid", "-r")
-	netName, _ := cmd.Output()
+	netName, err := cmd.Output()
+	if err != nil {
+		out += string(fmt.Sprintln(err))
+	}
 	out += string(netName)
 
 	// IP
@@ -33,6 +35,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, out)
 }
 
+// debug
 func getHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got /hello request\n")
 	io.WriteString(w, "Hello, HTTP!\n")
@@ -52,9 +55,12 @@ func GetOutboundIP() net.IP {
 }
 
 func main() {
+	log.Println("gmonitor starting up...")
+
 	http.HandleFunc("/", getRoot)
 	http.HandleFunc("/hello", getHello)
 
-	log.Println("server is up, listening on port", port)
-	http.ListenAndServe(":"+strconv.Itoa(port), nil)
+	if err := http.ListenAndServe(":"+strconv.Itoa(port), nil); err != nil {
+		log.Fatal("fail to start server:", err)
+	}
 }
