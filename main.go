@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"os/exec"
 	"strconv"
+
+	"nmyk.io/cowsay"
 )
 
 var port int = 8080
@@ -16,7 +18,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got / request\n")
 
 	// net name
-	out := ""
+	out := "\n"
 	cmd := exec.Command("iwgetid", "-r")
 	netName, err := cmd.Output()
 	if err != nil {
@@ -32,7 +34,8 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	temperature, _ := cmd.Output()
 	out += string(temperature)
 
-	io.WriteString(w, out)
+	cowsay.Cow{}.Write(w, []byte(out), false)
+	// io.WriteString(w, out)
 }
 
 // debug

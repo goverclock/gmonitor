@@ -5,3 +5,34 @@
 作用:把网络名称和IP地址输出到8080端口,使用浏览器访问内网穿透(例如[cpolar](https://www.cpolar.com/))的URL即可获得.
 
 未来不太可能会加入更多功能,因为太懒了.
+
+```
+ ____________________________________
+/                                    \
+| BUPT-portal                        |
+| 192.168.10.18                      |
+| cpu_thermal-virtual-0              |
+| Adapter: Virtual device            |
+| temp1: +56.9°C (crit = +105.0°C) |
+|                                    |
+| gpu_thermal-virtual-0              |
+| Adapter: Virtual device            |
+| temp1: +56.6°C                    |
+|                                    |
+| ddr_thermal-virtual-0              |
+| Adapter: Virtual device            |
+| temp1: +57.8°C                    |
+|                                    |
+| ve_thermal-virtual-0               |
+| Adapter: Virtual device            |
+| temp1: +57.1°C                    |
+|                                    |
+\                                    /
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+```
